@@ -1,3 +1,5 @@
+from exceptions import PlaceBookingError
+
 class Session:
     def __init__(self, mesta, length):
         self.mesta = mesta[:]
@@ -10,7 +12,8 @@ class Session:
                 self.mesta[int(i[0])][int(i[1])] = 'x'
             else:
                 zabr.append(i)
-                raise PlaceBookingError
+                raise PlaceBookingError('text')
+
 
 
     def get_mesta(self):

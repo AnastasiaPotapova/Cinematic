@@ -1,5 +1,7 @@
-class Being(Exception):
+class BeingError(Exception):
     def __init__(self, text):
         print(text)
 
-class PlaceBooking
+class PlaceBookingError(Exception):
+    def __init__(self, text):
+        print(text)

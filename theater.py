@@ -1,5 +1,5 @@
 from room import Room
-from exceptions import Being
+from exceptions import BeingError
 
 
 class Theater:
@@ -10,7 +10,9 @@ class Theater:
         if room not in self.rooms:
             self.rooms[room] = Room(sizes)
         else:
-            raise Being("Кинозал уже существует")
+            raise BeingError("Кинозал уже существует")
+
+    # def append_session(self):
 
     def show_information(self):
         return self.rooms
