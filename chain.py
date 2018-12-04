@@ -1,4 +1,4 @@
-from theatre import Theater
+from theater import Theater
 from exceptions import BeingError
 
 class Chain:
@@ -6,7 +6,6 @@ class Chain:
 
     def theater_checking(self, name):
         return True if name in Chain.theaters else False
-
 
     def append_theater(self, theater_name):
         if self.theater_checking(theater_name):
