@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QLCDNumber, QLabel
 from visualchain import Ui_MainWindow
 from logic import Chain
 
+
 class Cinem(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
@@ -20,16 +21,12 @@ class Cinem(QMainWindow, Ui_MainWindow):
         self.lbl.setText(text)
         self.lbl.adjustSize()
 
-
     def add_cinema(self):
-        self.chain.append(self.name_cinema.text())
-        self.boxcinema.addItems(self.chain.spisok())
-
-
-
+        cinema_name = self.name_cinema.text()
+        self.chain.append(cinema_name)
+        self.boxcinema.addItems([cinema_name])
 
 app = QApplication(sys.argv)
 ex = Cinem()
 ex.show()
 sys.exit(app.exec_())
-
