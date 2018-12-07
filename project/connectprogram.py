@@ -4,7 +4,8 @@ from PyQt5.QtWidgets import QLCDNumber, QLabel
 from visualchain import Ui_MainWindow
 from logic import Chain
 
-class Example(QMainWindow,Ui_MainWindow):
+
+class Example(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
@@ -14,10 +15,8 @@ class Example(QMainWindow,Ui_MainWindow):
     def initUI(self):
         self.btnadd_cinema.connect(self.add_cinema)
 
-        
     def add_cinema(self):
         self.chain.append(self.name_cinema.text())
-
 
 
 app = QApplication(sys.argv)
