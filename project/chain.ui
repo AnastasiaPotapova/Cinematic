@@ -47,7 +47,7 @@
      <string>Добавить</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="go_over">
+   <widget class="QPushButton" name="go_over_to_cinema">
     <property name="geometry">
      <rect>
       <x>20</x>

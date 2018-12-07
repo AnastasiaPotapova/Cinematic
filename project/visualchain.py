@@ -23,9 +23,9 @@ class Ui_MainWindow(object):
         self.btnadd_cinema = QtWidgets.QPushButton(self.centralwidget)
         self.btnadd_cinema.setGeometry(QtCore.QRect(20, 60, 75, 23))
         self.btnadd_cinema.setObjectName("btnadd_cinema")
-        self.go_over = QtWidgets.QPushButton(self.centralwidget)
-        self.go_over.setGeometry(QtCore.QRect(20, 130, 71, 21))
-        self.go_over.setObjectName("go_over")
+        self.go_over_to_cinema = QtWidgets.QPushButton(self.centralwidget)
+        self.go_over_to_cinema.setGeometry(QtCore.QRect(20, 130, 71, 21))
+        self.go_over_to_cinema.setObjectName("go_over_to_cinema")
         self.textBrowser = QtWidgets.QTextBrowser(self.centralwidget)
         self.textBrowser.setGeometry(QtCore.QRect(10, 10, 261, 31))
         self.textBrowser.setObjectName("textBrowser")
@@ -45,7 +45,7 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.btnadd_cinema.setText(_translate("MainWindow", "Добавить"))
-        self.go_over.setText(_translate("MainWindow", "Перейти"))
+        self.go_over_to_cinema.setText(_translate("MainWindow", "Перейти"))
         self.textBrowser.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
