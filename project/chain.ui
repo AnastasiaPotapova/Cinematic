@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>ChainWindow</class>
+ <widget class="QMainWindow" name="ChainWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>278</width>
-    <height>234</height>
+    <height>249</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,9 +17,9 @@
    <widget class="QComboBox" name="boxcinema">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>10</x>
       <y>90</y>
-      <width>241</width>
+      <width>261</width>
       <height>31</height>
      </rect>
     </property>
@@ -44,7 +44,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QLineEdit" name="name_cinema">
     <property name="geometry">
      <rect>
-      <x>132</x>
+      <x>140</x>
       <y>60</y>
       <width>131</width>
       <height>20</height>
@@ -54,7 +54,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="btnadd_cinema">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>10</x>
       <y>60</y>
       <width>75</width>
       <height>23</height>
@@ -67,7 +67,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="go_over">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>10</x>
       <y>130</y>
       <width>71</width>
       <height>21</height>
@@ -75,6 +75,19 @@ p, li { white-space: pre-wrap; }
     </property>
     <property name="text">
      <string>Перейти</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="name_cinema_8">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>60</y>
+      <width>41</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>name</string>
     </property>
    </widget>
   </widget>
