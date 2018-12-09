@@ -1,1 +1,1 @@
-pyuic5 cinema.ui -0 visualcinema.py
+pyuic5 chain.ui -0 visualchain.py

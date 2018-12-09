@@ -1,12 +1,16 @@
 class Film:
-    def __init__(self, name, time, room, cinema):
+    def __init__(self, name, time, room, cinema, size):
         self.name = name
         self.time = time
         self.room = room
         self.cinema = cinema
+        self.size = size
 
     def show_name(self):
         return self.name
+
+    def show_places(self):
+        return '\n'.join([' '.join(x) for x in size])
 
 
 class Room:
@@ -15,10 +19,10 @@ class Room:
         self.name = name
         self.films = films[:] if films else []
         line = ['0' for _ in range(y)]
-        self.size = [line.copy() for _ in range(x)]
+        self.room = [line.copy() for _ in range(x)]
 
     def append(self, film_name, film_time):
-        self.films.append(Film(film_name, film_time, self.name, self.cinema))
+        self.films.append(Film(film_name, film_time, self.name, self.cinema, self.room))
 
     def show_name(self):
         return self.name
