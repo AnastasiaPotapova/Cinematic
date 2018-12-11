@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_ChainWindow(object):
     def setupUi(self, ChainWindow):
         ChainWindow.setObjectName("ChainWindow")
-        ChainWindow.resize(280, 270)
+        ChainWindow.resize(280, 227)
         self.centralwidget = QtWidgets.QWidget(ChainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.boxcinema = QtWidgets.QComboBox(self.centralwidget)
@@ -35,9 +35,6 @@ class Ui_ChainWindow(object):
         self.textEdit_2 = QtWidgets.QTextEdit(self.centralwidget)
         self.textEdit_2.setGeometry(QtCore.QRect(90, 130, 181, 51))
         self.textEdit_2.setObjectName("textEdit_2")
-        self.example = QtWidgets.QPushButton(self.centralwidget)
-        self.example.setGeometry(QtCore.QRect(60, 190, 71, 31))
-        self.example.setObjectName("example")
         ChainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(ChainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 280, 21))
@@ -66,5 +63,4 @@ class Ui_ChainWindow(object):
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt; font-weight:600; color:#ff0000;\">Warning! Кинотеатры не должны иметь одинаковые названия!</span></p></body></html>"))
-        self.example.setText(_translate("ChainWindow", "Перейти"))
 

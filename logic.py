@@ -12,13 +12,21 @@ class Film:
     def show_places(self):
         return '\n'.join([' '.join(x) for x in self.size])
 
+    def check_place(self, x, y):
+        if self.size[x][y] == '0':
+            return False
+        else:
+            return True
+
+    def book_place(self, x, y):
+        self.size[x][y] = 'x'
 
 class Room:
     def __init__(self, cinema, name, x, y, films=None):
         self.cinema = cinema
         self.name = name
         self.films = films[:] if films else []
-        self.room = [['0' for j in range(y)] for i in range(x)]
+        self.room = [['0' for _ in range(y)] for _ in range(x)]
 
     def append(self, film_name, film_time):
         self.films.append(Film(film_name, film_time, self.name, self.cinema, self.room))

@@ -60,7 +60,9 @@ class Ui_CinemaWindow(object):
         self.btnadd_room.setText(_translate("CinemaWindow", "Добавить"))
         self.name_cinema_5.setText(_translate("CinemaWindow", "name"))
         self.name_cinema_6.setText(_translate("CinemaWindow", "количество рядов"))
+        self.x_input.setText(_translate("CinemaWindow", "10"))
         self.name_cinema_7.setText(_translate("CinemaWindow", "кол-во мест в ряду"))
+        self.y_input.setText(_translate("CinemaWindow", "10"))
         self.go_over_2.setText(_translate("CinemaWindow", "Перейти"))
         self.textEdit_2.setHtml(_translate("CinemaWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"

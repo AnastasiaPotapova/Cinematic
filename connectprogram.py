@@ -1,6 +1,8 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMainWindow, QComboBox
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMainWindow, \
+    QComboBox
 from PyQt5.QtWidgets import QLCDNumber, QLabel
+from PyQt5 import QtCore
 from visualchain import Ui_ChainWindow
 from visualcinema import Ui_CinemaWindow
 from visualroom import Ui_RoomWindow
@@ -9,7 +11,7 @@ from logic import Chain, Cinema, Room, Film
 
 
 class FilmM(QWidget, Ui_FilmWindow):
-    def __init__(self, a):
+    def __init__(self, a=None):  # Убрать =None и раскоментить то, что с 1-й #
         super(FilmM, self).__init__()
         self.setupUi(self)
         self.film = a
@@ -20,16 +22,41 @@ class FilmM(QWidget, Ui_FilmWindow):
         self.room_session.setText(self.film.show_places())
 
     def choose(self):
-        self.films.append(Film(self.film_name.text(), self.film_time.text()))
-        self.boxfilms.clear()
-        self.boxfilms.addItems(self.films.spisok())
+        try:
+            places = [(int(x[0]), int(x[2])) for x in
+                      self.place_coords.text().split("/")]
+        except Exception:
+            self.change_status("Error1")
+
+        if any(filter(lambda x: self.film.check_place(x[0], x[1]), places)):
+            self.change_status("Ошибка. Выбраны уже занятые места.")
+        elif len(set(places)) != len(places):
+            self.change_status(
+                "Ошибка. Выбраны как минимум 2 одиннаковых места")
+        else:
+            for x in places:
+                self.film.book_place(x[0], x[1])
+
+        self.room_session.setText(self.film.show_places())
+
+        ## self.films.append(Film(self.film_name.text(), self.film_time.text()))
+        ## self.boxfilms.clear()
+        ## self.boxfilms.addItems(self.films.spisok())
+
+    def change_status(self, text):
+        self.status.clear()
+        self.status.append(text)
+
+
+
+
 
 
 class RoomM(QWidget, Ui_RoomWindow):
-    def __init__(self, a):
+    def __init__(self, name):
         super(RoomM, self).__init__()
         self.setupUi(self)
-        self.room = a
+        self.room = name
         self.initUI()
 
     def initUI(self):
@@ -53,10 +80,10 @@ class RoomM(QWidget, Ui_RoomWindow):
 
 
 class CinemaM(QWidget, Ui_CinemaWindow):
-    def __init__(self, a):
+    def __init__(self, name):
         super(CinemaM, self).__init__()
         self.setupUi(self)
-        self.cinema = a
+        self.cinema = name
         self.initUI()
 
     def initUI(self):
@@ -70,7 +97,8 @@ class CinemaM(QWidget, Ui_CinemaWindow):
         self.lbl.adjustSize()
 
     def add_room(self):
-        self.cinema.append(self.name_room.text(), int(self.x_input.text()), int(self.y_input.text()))
+        self.cinema.append(self.name_room.text(), int(self.x_input.text()),
+                           int(self.y_input.text()))
         self.boxrooms.clear()
         self.boxrooms.addItems(self.cinema.spisok())
 
@@ -91,7 +119,6 @@ class ChainM(QMainWindow, Ui_ChainWindow):
         self.go_over.clicked.connect(self.show_cinema)
         self.boxcinema.addItems(self.chain.spisok())
         # self.boxcinema.activated[str].connect(self.onActivated)
-        self.example.clicked.connect(self.ex)
 
     def ex(self):
         print(self.boxcinema.currentIndex())
