@@ -48,10 +48,6 @@ class FilmM(QWidget, Ui_FilmWindow):
         self.status.append(text)
 
 
-
-
-
-
 class RoomM(QWidget, Ui_RoomWindow):
     def __init__(self, name):
         super(RoomM, self).__init__()
@@ -120,20 +116,21 @@ class ChainM(QMainWindow, Ui_ChainWindow):
         self.boxcinema.addItems(self.chain.spisok())
         # self.boxcinema.activated[str].connect(self.onActivated)
 
-    def ex(self):
-        print(self.boxcinema.currentIndex())
+    # def ex(self):
+    #     print(self.boxcinema.currentIndex())
 
     # def onActivated(self, text):
     #     self.lbl.setText(text)
     #     self.lbl.adjustSize()
 
     def add_cinema(self):
-        self.chain.append(self.name_cinema.text())
-        self.boxcinema.clear()
-        self.boxcinema.addItems(self.chain.spisok())
+        name = self.name_cinema.text()
+        self.chain.append(name)
+        self.boxcinema.addItems([name])
 
     def show_cinema(self):
-        self.w1 = CinemaM(self.chain[0])
+        self.w1 = CinemaM(self.chain.chain[self.chain.spisok().index(
+            self.boxcinema.currentText())])
         self.w1.show()
 
 

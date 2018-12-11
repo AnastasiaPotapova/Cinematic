@@ -89,7 +89,7 @@ p, li { white-space: pre-wrap; }
     </rect>
    </property>
    <property name="text">
-    <string>10</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLineEdit" name="name_cinema_7">
@@ -115,7 +115,7 @@ p, li { white-space: pre-wrap; }
     </rect>
    </property>
    <property name="text">
-    <string>10</string>
+    <string/>
    </property>
   </widget>
   <widget class="QComboBox" name="boxrooms">
