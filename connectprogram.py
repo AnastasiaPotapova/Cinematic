@@ -9,17 +9,15 @@ from logic import Chain, Cinema, Room, Film
 
 
 class FilmM(QWidget, Ui_FilmWindow):
-    def __init__(self):
+    def __init__(self, a):
         super(FilmM, self).__init__()
         self.setupUi(self)
-        self.film = Film()
+        self.film = a
         self.initUI()
 
     def initUI(self):
-        self.btnchoose.clicked.connect(self.choose)
-
-    def show_room(self):
-        self.room_session.append(self.film.show_places)
+        self.btn_choose.clicked.connect(self.choose)
+        self.room_session.setText(self.film.show_places())
 
     def choose(self):
         self.films.append(Film(self.film_name.text(), self.film_time.text()))
@@ -28,10 +26,10 @@ class FilmM(QWidget, Ui_FilmWindow):
 
 
 class RoomM(QWidget, Ui_RoomWindow):
-    def __init__(self):
+    def __init__(self, a):
         super(RoomM, self).__init__()
         self.setupUi(self)
-        self.room = Room('fefe', 5, 5, 5)
+        self.room = a
         self.initUI()
 
     def initUI(self):
@@ -45,12 +43,12 @@ class RoomM(QWidget, Ui_RoomWindow):
         self.lbl.adjustSize()
 
     def add_film(self):
-        self.room.append(Film(self.film_name.text(), self.film_time.text()))
-        self.boxfilms.clear()
-        self.boxfilms.addItems(self.room.spisok())
+        self.room.append(self.film_name.text(), self.film_time.text())
+        self.boxfilm.clear()
+        self.boxfilm.addItems(self.room.spisok())
 
     def show_film(self):
-        self.w1 = FilmM()
+        self.w1 = FilmM(self.room[0])
         self.w1.show()
 
 
@@ -72,12 +70,12 @@ class CinemaM(QWidget, Ui_CinemaWindow):
         self.lbl.adjustSize()
 
     def add_room(self):
-        self.cinema.append(self.name_room.text(), self.x_input.text(), self.y_input.text())
+        self.cinema.append(self.name_room.text(), int(self.x_input.text()), int(self.y_input.text()))
         self.boxrooms.clear()
-        self.boxrooms.addItems(self.rooms.spisok())
+        self.boxrooms.addItems(self.cinema.spisok())
 
     def show_room(self):
-        self.w1 = RoomM()
+        self.w1 = RoomM(self.cinema[0])
         self.w1.show()
 
 
@@ -106,10 +104,10 @@ class ChainM(QMainWindow, Ui_ChainWindow):
     def show_cinema(self):
         self.w1 = CinemaM(self.chain[0])
         self.w1.show()
-        print(self.boxcinema.currentIndex())
+        #print(self.boxcinema.currentIndex())
 
 
 app = QApplication(sys.argv)
-ex = RoomM()
+ex = ChainM()
 ex.show()
 sys.exit(app.exec_())
