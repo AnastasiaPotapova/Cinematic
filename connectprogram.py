@@ -1,5 +1,5 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMainWindow
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMainWindow, QComboBox
 from PyQt5.QtWidgets import QLCDNumber, QLabel
 from visualchain import Ui_ChainWindow
 from visualcinema import Ui_CinemaWindow
@@ -90,11 +90,15 @@ class ChainM(QMainWindow, Ui_ChainWindow):
         self.btnadd_cinema.clicked.connect(self.add_cinema)
         self.go_over.clicked.connect(self.show_cinema)
         self.boxcinema.addItems(self.chain.spisok())
-        self.boxcinema.activated[str].connect(self.onActivated)
+        # self.boxcinema.activated[str].connect(self.onActivated)
+        self.example.clicked.connect(self.ex)
 
-    def onActivated(self, text):
-        self.lbl.setText(text)
-        self.lbl.adjustSize()
+    def ex(self):
+        print(self.boxcinema.currentIndex())
+
+    # def onActivated(self, text):
+    #     self.lbl.setText(text)
+    #     self.lbl.adjustSize()
 
     def add_cinema(self):
         self.chain.append(self.name_cinema.text())
@@ -104,7 +108,6 @@ class ChainM(QMainWindow, Ui_ChainWindow):
     def show_cinema(self):
         self.w1 = CinemaM(self.chain[0])
         self.w1.show()
-        #print(self.boxcinema.currentIndex())
 
 
 app = QApplication(sys.argv)
