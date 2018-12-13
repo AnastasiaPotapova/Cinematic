@@ -5,6 +5,8 @@ class Film:
         self.room = room
         self.cinema = cinema
         self.size = [['0' for _ in range(y)] for _ in range(x)]
+        self.max_indexes = (len(self.size) - 1, len(self.size[0]) - 1)
+        print(self.max_indexes)
 
     def show_name(self):
         return self.name
@@ -12,7 +14,13 @@ class Film:
     def show_places(self):
         return '\n'.join([' '.join(x) for x in self.size])
 
-    def check_place(self, x, y):
+    def check_place_beeing(self, x, y):
+        if 0 <= x <= self.max_indexes[0] and 0 <= y <= self.max_indexes[1]:
+            return False
+        else:
+            return True
+
+    def check_place_is_free(self, x, y):
         if self.size[x][y] == '0':
             return False
         else:

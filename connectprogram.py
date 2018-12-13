@@ -1,6 +1,6 @@
 import sys
 
-from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow
+from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QLabel
 from PyQt5.QtCore import Qt
 
 from visualchain import Ui_ChainWindow
@@ -21,6 +21,15 @@ class FilmM(QWidget, Ui_FilmWindow):
         self.btn_choose.clicked.connect(self.choose)
         self.room_session.setText(self.film.show_places())
 
+    def mousePressEvent(self, event):
+        if event.button() == Qt.LeftButton:
+            x, y = (event.x() - 12) // 9, (event.y() - 12) // 13
+
+            if self.film.check_place_beeing(y, x):
+                self.coords.setText("---")
+            else:
+                self.coords.setText("{}, {}".format(y+1, x+1))
+
     def keyPressEvent(self, event):
         ev = event.key()
         if ev == Qt.Key_Enter or ev == 16777220:
@@ -36,7 +45,10 @@ class FilmM(QWidget, Ui_FilmWindow):
         except Exception:
             self.change_status("Неверный формат ввода.")
 
-        if any(filter(lambda x: self.film.check_place(x[0], x[1]), places)):
+        if any(filter(lambda z: self.film.check_place_beeing(z[0], z[1]),
+                      places)):
+            self.change_status("Ошибка. Выбраны несуществующие места.")
+        elif any(filter(lambda x: self.film.check_place_is_free(x[0], x[1]), places)):
             self.change_status("Ошибка. Выбраны уже занятые места.")
         elif len(set(places)) != len(places):
             self.change_status(
