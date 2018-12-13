@@ -32,20 +32,19 @@ class FilmM(QWidget, Ui_FilmWindow):
             for a in self.place_coords.text().split("/"):
                 x, y = map(lambda b: int(b)-1, a.split(";"))
                 places.append((x, y))
-
+                
+            if any(filter(lambda x: self.film.check_place(x[0], x[1]), places)):
+                self.change_status("Ошибка. Выбраны уже занятые места.")
+            elif len(set(places)) != len(places):
+                self.change_status(
+                    "Ошибка. Выбраны как минимум 2 одиннаковых места.")
+            else:
+                for x in places:
+                    self.film.book_place(x[0], x[1])
+                self.change_status(
+                    "Успешно")
         except Exception:
             self.change_status("Неверный формат ввода.")
-
-        if any(filter(lambda x: self.film.check_place(x[0], x[1]), places)):
-            self.change_status("Ошибка. Выбраны уже занятые места.")
-        elif len(set(places)) != len(places):
-            self.change_status(
-                "Ошибка. Выбраны как минимум 2 одиннаковых места.")
-        else:
-            for x in places:
-                self.film.book_place(x[0], x[1])
-            self.change_status(
-                "Успешно")
 
         self.room_session.setText(self.film.show_places())
 
