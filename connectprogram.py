@@ -22,9 +22,7 @@ class SearchM(QWidget, Ui_Search):
         self.btnsearch.clicked.connect(self.show_searched)
 
     def show_searched(self):
-        print(0)
         self.cinem_room.setText(self.chain.find_film(self.name_cinema.text()))
-        print(1)
 
 
 class FilmM(QWidget, Ui_FilmWindow):

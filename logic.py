@@ -21,6 +21,7 @@ class Film:
     def book_place(self, x, y):
         self.size[x][y] = 'x'
 
+
 class Room:
     def __init__(self, cinema, name, x, y, films=None):
         self.cinema = cinema
@@ -30,7 +31,8 @@ class Room:
         self.y = y
 
     def append(self, film_name, film_time):
-        self.films.append(Film(film_name, film_time, self.name, self.cinema, self.x, self.y))
+        self.films.append(
+            Film(film_name, film_time, self.name, self.cinema, self.x, self.y))
 
     def show_name(self):
         return self.name
@@ -78,14 +80,13 @@ class Chain:
 
     def find_film(self, name_film):
         ans = []
-        print(2)
         for x in self.chain:
             for y in x.rooms:
                 for z in y.films:
-                    print(z.show_name(), name_film)
                     if z.show_name() == name_film:
-                        print(3)
-                        ans.append([x.show_name(), y.show_name()])
-        print(4)
-        return '\n'.join([', '.join(x)for x in ans])
-
+                        ans.append(['Кинотеатр: ' + x.show_name(),
+                                    'зал: ' + y.show_name() + ';'])
+        if ans:
+            return "\n".join([", ".join(x) for x in ans])[:-2] + '.'
+        else:
+            return "Не найдено."
