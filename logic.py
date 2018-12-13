@@ -5,10 +5,6 @@ class Film:
         self.room = room
         self.cinema = cinema
         self.size = [['0' for _ in range(y)] for _ in range(x)]
-        self.max_indexes = (len(self.size) - 1, len(self.size[0]) - 1)
-        a = [' ' for _ in range(y)]
-        for _ in range(10-x):
-            self.size.append(a)
 
     def show_name(self):
         return self.name
@@ -16,13 +12,7 @@ class Film:
     def show_places(self):
         return '\n'.join([' '.join(x) for x in self.size])
 
-    def check_place_beeing(self, x, y):
-        if 0 <= x <= self.max_indexes[0] and 0 <= y <= self.max_indexes[1]:
-            return False
-        else:
-            return True
-
-    def check_place_is_free(self, x, y):
+    def check_place(self, x, y):
         if self.size[x][y] == '0':
             return False
         else:
@@ -85,3 +75,17 @@ class Chain:
 
     def __getitem__(self, item):
         return self.chain[item]
+
+    def find_film(self, name_film):
+        ans = []
+        print(2)
+        for x in self.chain:
+            for y in x.rooms:
+                for z in y.films:
+                    print(z.show_name(), name_film)
+                    if z.show_name() == name_film:
+                        print(3)
+                        ans.append([x.show_name(), y.show_name()])
+        print(4)
+        return '\n'.join([', '.join(x)for x in ans])
+

@@ -32,6 +32,9 @@ class Ui_ChainWindow(object):
         self.textBrowser = QtWidgets.QTextBrowser(self.centralwidget)
         self.textBrowser.setGeometry(QtCore.QRect(10, 10, 261, 41))
         self.textBrowser.setObjectName("textBrowser")
+        self.search_film = QtWidgets.QPushButton(self.centralwidget)
+        self.search_film.setGeometry(QtCore.QRect(90, 130, 91, 51))
+        self.search_film.setObjectName("search_film")
         ChainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(ChainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 280, 21))
@@ -55,4 +58,5 @@ class Ui_ChainWindow(object):
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt; font-weight:600;\">Добавте или выберите кинотетр</span></p></body></html>"))
+        self.search_film.setText(_translate("ChainWindow", "Найти фильм"))
 

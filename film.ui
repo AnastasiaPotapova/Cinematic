@@ -10,9 +10,6 @@
     <height>286</height>
    </rect>
   </property>
-  <property name="mouseTracking">
-   <bool>true</bool>
-  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
@@ -51,7 +48,7 @@
     </sizepolicy>
    </property>
   </widget>
-  <widget class="QLabel" name="coords_wr">
+  <widget class="QLabel" name="inscription_price">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -67,10 +64,10 @@
     </sizepolicy>
    </property>
    <property name="text">
-    <string>Место:</string>
+    <string>Цена:</string>
    </property>
   </widget>
-  <widget class="QLabel" name="coords">
+  <widget class="QLabel" name="price">
    <property name="geometry">
     <rect>
      <x>60</x>
@@ -131,7 +128,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#ff0000;&quot;&gt;Ожидание бронирования&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QLabel" name="room_session">
+  <widget class="QTextBrowser" name="room_session">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -140,20 +137,11 @@ p, li { white-space: pre-wrap; }
      <height>131</height>
     </rect>
    </property>
-   <property name="cursor">
-    <cursorShape>CrossCursor</cursorShape>
+   <property name="verticalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOn</enum>
    </property>
-   <property name="mouseTracking">
-    <bool>true</bool>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(255, 255, 255);</string>
-   </property>
-   <property name="frameShape">
-    <enum>QFrame::Box</enum>
-   </property>
-   <property name="text">
-    <string/>
+   <property name="horizontalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOn</enum>
    </property>
   </widget>
  </widget>
