@@ -6,6 +6,9 @@ class Film:
         self.cinema = cinema
         self.size = [['0' for _ in range(y)] for _ in range(x)]
         self.max_indexes = (len(self.size) - 1, len(self.size[0]) - 1)
+        a = [' ' for _ in range(y)]
+        for _ in range(10-x):
+            self.size.append(a)
 
     def show_name(self):
         return self.name
