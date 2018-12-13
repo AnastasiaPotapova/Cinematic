@@ -31,7 +31,9 @@ class FilmM(QWidget, Ui_FilmWindow):
         except Exception:
             self.change_status("Неверный формат ввода.")
 
-        if any(filter(lambda x: self.film.check_place(x[0], x[1]), places)):
+        if any(filter(lambda x: self.film.check_place_beeing(x[0], x[1]), places)):
+            self.change_status("Ошибка. Выбраны несуществующие места.")
+        elif any(filter(lambda x: self.film.check_place_is_free(x[0], x[1]), places)):
             self.change_status("Ошибка. Выбраны уже занятые места.")
         elif len(set(places)) != len(places):
             self.change_status(
@@ -39,6 +41,7 @@ class FilmM(QWidget, Ui_FilmWindow):
         else:
             for x in places:
                 self.film.book_place(x[0], x[1])
+            self.change_status("Успешно.")
 
         self.room_session.setText(self.film.show_places())
 
