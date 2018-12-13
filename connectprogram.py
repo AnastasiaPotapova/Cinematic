@@ -1,13 +1,13 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMainWindow, \
-    QComboBox
-from PyQt5.QtWidgets import QLCDNumber, QLabel
-from PyQt5 import QtCore
+
+from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow
+from PyQt5.QtCore import Qt
+
 from visualchain import Ui_ChainWindow
 from visualcinema import Ui_CinemaWindow
 from visualroom import Ui_RoomWindow
 from visualfilm import Ui_FilmWindow
-from logic import Chain, Cinema, Room, Film
+from logic import Chain
 
 
 class FilmM(QWidget, Ui_FilmWindow):
@@ -20,6 +20,11 @@ class FilmM(QWidget, Ui_FilmWindow):
     def initUI(self):
         self.btn_choose.clicked.connect(self.choose)
         self.room_session.setText(self.film.show_places())
+
+    def keyPressEvent(self, event):
+        ev = event.key()
+        if ev == Qt.Key_Enter or ev == 16777220:
+            self.choose()
 
     def choose(self):
         try:
@@ -39,6 +44,8 @@ class FilmM(QWidget, Ui_FilmWindow):
         else:
             for x in places:
                 self.film.book_place(x[0], x[1])
+            self.change_status(
+                "Успешно")
 
         self.room_session.setText(self.film.show_places())
 
