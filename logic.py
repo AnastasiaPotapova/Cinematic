@@ -1,10 +1,10 @@
 class Film:
-    def __init__(self, name, time, room, cinema, size):
+    def __init__(self, name, time, room, cinema, x, y):
         self.name = name
         self.time = time
         self.room = room
         self.cinema = cinema
-        self.size = size
+        self.size = [['0' for _ in range(y)] for _ in range(x)]
 
     def show_name(self):
         return self.name
@@ -26,10 +26,11 @@ class Room:
         self.cinema = cinema
         self.name = name
         self.films = films[:] if films else []
-        self.room = [['0' for _ in range(y)] for _ in range(x)]
+        self.x = x
+        self.y = y
 
     def append(self, film_name, film_time):
-        self.films.append(Film(film_name, film_time, self.name, self.cinema, self.room))
+        self.films.append(Film(film_name, film_time, self.name, self.cinema, self.x, self.y))
 
     def show_name(self):
         return self.name
