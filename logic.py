@@ -6,8 +6,6 @@ class Film:
         self.cinema = cinema
         self.size = size
         self.max_indexes = (len(size)-1, len(size[0])-1)
-        print(self.max_indexes)
-        print(name, time, room, cinema, size, sep='\n')
 
     def show_name(self):
         return self.name

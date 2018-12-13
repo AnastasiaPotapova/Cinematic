@@ -1,13 +1,13 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMainWindow, \
-    QComboBox
-from PyQt5.QtWidgets import QLCDNumber, QLabel
-from PyQt5 import QtCore
+
+from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow
+from PyQt5.QtCore import Qt
+
 from visualchain import Ui_ChainWindow
 from visualcinema import Ui_CinemaWindow
 from visualroom import Ui_RoomWindow
 from visualfilm import Ui_FilmWindow
-from logic import Chain, Cinema, Room, Film
+from logic import Chain
 
 
 class FilmM(QWidget, Ui_FilmWindow):
@@ -21,19 +21,27 @@ class FilmM(QWidget, Ui_FilmWindow):
         self.btn_choose.clicked.connect(self.choose)
         self.room_session.setText(self.film.show_places())
 
+    def keyPressEvent(self, event):
+        ev = event.key()
+        if ev == Qt.Key_Enter or ev == 16777220:
+            self.choose()
+
     def choose(self):
         try:
             places = []
-            for a in self.place_coords.text().split("/"):
-                x, y = map(lambda b: int(b)-1, a.split(";"))
+            data = self.place_coords.text().split("/")
+            for a in data:
+                x, y = map(lambda b: int(b) - 1, a.split(";")) #ОСОСООСОСОСОСОСОСОСООСООСОСОС
                 places.append((x, y))
 
         except Exception:
             self.change_status("Неверный формат ввода.")
 
-        if any(filter(lambda x: self.film.check_place_beeing(x[0], x[1]), places)):
+        if any(filter(lambda z: self.film.check_place_beeing(z[0], z[1]),
+                      places)):
             self.change_status("Ошибка. Выбраны несуществующие места.")
-        elif any(filter(lambda x: self.film.check_place_is_free(x[0], x[1]), places)):
+        elif any(filter(lambda z: self.film.check_place_is_free(z[0], z[1]),
+                        places)):
             self.change_status("Ошибка. Выбраны уже занятые места.")
         elif len(set(places)) != len(places):
             self.change_status(
@@ -115,6 +123,7 @@ class ChainM(QMainWindow, Ui_ChainWindow):
     def show_cinema(self):
         self.w1 = CinemaM(self.chain[self.boxcinema.currentIndex()])
         self.w1.show()
+
 
 app = QApplication(sys.argv)
 ex = ChainM()
