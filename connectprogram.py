@@ -43,7 +43,7 @@ class FilmM(QWidget, Ui_FilmWindow):
             if self.film.check_place_beeing(y, x):
                 self.coords.setText("---")
             else:
-                self.coords.setText("{}; {}".format(y+1, x+1))
+                self.coords.setText("{};{}".format(y+1, x+1))
 
     def keyPressEvent(self, event):
         ev = event.key()
