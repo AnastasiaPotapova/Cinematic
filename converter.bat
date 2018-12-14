@@ -1,1 +1,1 @@
-pyuic5 chain.ui -0 visualchain.py
+pyuic5 ui_file.ui -o ui_file.py
