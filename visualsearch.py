@@ -9,11 +9,11 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_Search(object):
-    def setupUi(self, Search):
+    def setupUi(self, Search, color, colorb):
         Search.setObjectName("Search")
         Search.resize(283, 247)
         Search.setMaximumSize(QtCore.QSize(283, 247))
-        Search.setStyleSheet("background-color: rgb(26, 255, 236);")
+        Search.setStyleSheet("background-color: rgb{};".format(color))
         self.cinem_room = QtWidgets.QTextBrowser(Search)
         self.cinem_room.setGeometry(QtCore.QRect(10, 51, 261, 181))
         self.cinem_room.setToolTip("")
@@ -21,7 +21,7 @@ class Ui_Search(object):
         self.cinem_room.setObjectName("cinem_room")
         self.btnsearch = QtWidgets.QPushButton(Search)
         self.btnsearch.setGeometry(QtCore.QRect(214, 10, 61, 31))
-        self.btnsearch.setStyleSheet("background-color: rgb(24, 241, 0);")
+        self.btnsearch.setStyleSheet("background-color: rgb{};".format(colorb))
         self.btnsearch.setObjectName("btnsearch")
         self.name_cinema = QtWidgets.QLineEdit(Search)
         self.name_cinema.setGeometry(QtCore.QRect(10, 10, 191, 31))

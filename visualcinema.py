@@ -9,15 +9,15 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_CinemaWindow(object):
-    def setupUi(self, CinemaWindow):
+    def setupUi(self, CinemaWindow, color, colorb):
         CinemaWindow.setObjectName("CinemaWindow")
         CinemaWindow.resize(290, 245)
         CinemaWindow.setMinimumSize(QtCore.QSize(0, 0))
         CinemaWindow.setMaximumSize(QtCore.QSize(290, 245))
-        CinemaWindow.setStyleSheet("background-color: rgb(26, 255, 236);")
+        CinemaWindow.setStyleSheet("background-color: rgb{};".format(color))
         self.btnadd_room = QtWidgets.QPushButton(CinemaWindow)
         self.btnadd_room.setGeometry(QtCore.QRect(10, 60, 75, 23))
-        self.btnadd_room.setStyleSheet("background-color: rgb(24, 241, 0);")
+        self.btnadd_room.setStyleSheet("background-color: rgb{};".format(colorb))
         self.btnadd_room.setObjectName("btnadd_room")
         self.name_room = QtWidgets.QLineEdit(CinemaWindow)
         self.name_room.setGeometry(QtCore.QRect(150, 60, 131, 20))
@@ -39,7 +39,7 @@ class Ui_CinemaWindow(object):
         self.boxrooms.setObjectName("boxrooms")
         self.go_over_2 = QtWidgets.QPushButton(CinemaWindow)
         self.go_over_2.setGeometry(QtCore.QRect(10, 190, 71, 51))
-        self.go_over_2.setStyleSheet("background-color: rgb(24, 241, 0);")
+        self.go_over_2.setStyleSheet("background-color: rgb{};".format(colorb))
         self.go_over_2.setObjectName("go_over_2")
         self.textBrowser = QtWidgets.QTextBrowser(CinemaWindow)
         self.textBrowser.setGeometry(QtCore.QRect(10, 10, 261, 31))

@@ -9,12 +9,13 @@ from visualroom import Ui_RoomWindow
 from visualfilm import Ui_FilmWindow
 from logic import Chain
 from visualsearch import Ui_Search
+from visualsettings import Ui_Form
 
 
 class SearchM(QWidget, Ui_Search):
     def __init__(self, a):
         super().__init__()
-        self.setupUi(self)
+        self.setupUi(self, sett.colour, sett.colourb)
         self.chain = a
         self.initUI()
 
@@ -28,7 +29,7 @@ class SearchM(QWidget, Ui_Search):
 class FilmM(QWidget, Ui_FilmWindow):
     def __init__(self, a):
         super(FilmM, self).__init__()
-        self.setupUi(self)
+        self.setupUi(self, sett.colour, sett.colourb)
         self.film = a
         self.initUI()
 
@@ -43,7 +44,7 @@ class FilmM(QWidget, Ui_FilmWindow):
             if self.film.check_place_beeing(y, x):
                 self.coords.setText("---")
             else:
-                self.coords.setText("{};{}".format(y+1, x+1))
+                self.coords.setText("{};{}".format(y + 1, x + 1))
 
     def keyPressEvent(self, event):
         ev = event.key()
@@ -81,7 +82,7 @@ class FilmM(QWidget, Ui_FilmWindow):
 class RoomM(QWidget, Ui_RoomWindow):
     def __init__(self, name):
         super(RoomM, self).__init__()
-        self.setupUi(self)
+        self.setupUi(self, sett.colour, sett.colourb)
         self.room = name
         self.initUI()
 
@@ -103,7 +104,7 @@ class RoomM(QWidget, Ui_RoomWindow):
 class CinemaM(QWidget, Ui_CinemaWindow):
     def __init__(self, name):
         super(CinemaM, self).__init__()
-        self.setupUi(self)
+        self.setupUi(self, sett.colour, sett.colourb)
         self.cinema = name
         self.initUI()
 
@@ -123,16 +124,69 @@ class CinemaM(QWidget, Ui_CinemaWindow):
         self.w1.show()
 
 
+class Settings(QMainWindow, Ui_Form):
+    def __init__(self):
+        super().__init__()
+        self.colour = "(25, 255, 235)"
+        self.colourb = "(25, 240, 0)"
+        self.setupUi(self, self.colour, self.colourb)
+        self.initUI()
+
+    def initUI(self):
+        self.use_settings.clicked.connect(self.look_settings)
+
+    def look_settings(self):
+        if self.color_1.isChecked():
+            self.colour = "(255, 255, 255)"
+        elif self.color_2.isChecked():
+            self.colour = "(225, 225, 225)"
+        elif self.color_3.isChecked():
+            self.colour = "(120, 120, 120)"
+        elif self.color_5.isChecked():
+            self.colour = "(190, 15, 175)"
+        elif self.color_6.isChecked():
+            self.colour = "(255, 226, 155)"
+        elif self.color_7.isChecked():
+            self.colour = "(255, 128, 238)"
+        elif self.color_8.isChecked():
+            self.colour = "(190, 245, 115)"
+        elif self.color_9.isChecked():
+            self.colour = "(25, 240, 0)"
+        elif self.color_10.isChecked():
+            self.colour = "(25, 255, 235)"
+        if self.color2_1.isChecked():
+            self.colourb = "(255, 255, 255)";
+        elif self.color2_2.isChecked():
+            self.colourb = "(220, 220, 220)";
+        elif self.color2_3.isChecked():
+            self.colourb = "(190, 15, 175)";
+        elif self.color2_4.isChecked():
+            self.colourb = "(255, 226, 155)";
+        elif self.color2_5.isChecked():
+            self.colourb = "(255, 128, 238)";
+        elif self.color2_6.isChecked():
+            self.colourb = "(190, 245, 115)";
+        elif self.color2_7.isChecked():
+            self.colourb = "(25, 240, 0)";
+        elif self.color2_8.isChecked():
+            self.colourb = "(25, 255, 235)";
+        self.setupUi(self, self.colour, self.colourb)
+        try:
+            ex.setupUi(ex, sett.colour, sett.colourb)
+        except Exception as e:
+            print(e)
+
 class ChainM(QMainWindow, Ui_ChainWindow):
     def __init__(self):
         super(ChainM, self).__init__()
-        self.setupUi(self)
+        self.setupUi(self, sett.colour, sett.colourb)
         self.chain = Chain()
         self.initUI()
 
     def initUI(self):
         self.btnadd_cinema.clicked.connect(self.add_cinema)
         self.go_over.clicked.connect(self.show_cinema)
+        self.settings_button.clicked.connect(self.show_settings)
         self.search_film.clicked.connect(self.search)
         self.boxcinema.addItems(self.chain.spisok())
 
@@ -145,12 +199,16 @@ class ChainM(QMainWindow, Ui_ChainWindow):
         self.w1 = CinemaM(self.chain[self.boxcinema.currentIndex()])
         self.w1.show()
 
+    def show_settings(self):
+        sett.show()
+
     def search(self):
         self.w2 = SearchM(self.chain)
         self.w2.show()
 
 
 app = QApplication(sys.argv)
+sett = Settings()
 ex = ChainM()
 ex.show()
 sys.exit(app.exec_())

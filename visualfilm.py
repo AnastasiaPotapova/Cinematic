@@ -9,13 +9,13 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_FilmWindow(object):
-    def setupUi(self, FilmWindow):
+    def setupUi(self, FilmWindow, color, colorb):
         FilmWindow.setObjectName("FilmWindow")
         FilmWindow.resize(294, 286)
         FilmWindow.setMinimumSize(QtCore.QSize(0, 0))
         FilmWindow.setMaximumSize(QtCore.QSize(294, 286))
         FilmWindow.setMouseTracking(True)
-        FilmWindow.setStyleSheet("background-color: rgb(26, 255, 236);")
+        FilmWindow.setStyleSheet("background-color: rgb{};".format(color))
         self.btn_choose = QtWidgets.QPushButton(FilmWindow)
         self.btn_choose.setGeometry(QtCore.QRect(170, 200, 111, 31))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
@@ -23,7 +23,7 @@ class Ui_FilmWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.btn_choose.sizePolicy().hasHeightForWidth())
         self.btn_choose.setSizePolicy(sizePolicy)
-        self.btn_choose.setStyleSheet("background-color: rgb(24, 241, 0);")
+        self.btn_choose.setStyleSheet("background-color: rgb{};".format(colorb))
         self.btn_choose.setObjectName("btn_choose")
         self.place_coords = QtWidgets.QLineEdit(FilmWindow)
         self.place_coords.setGeometry(QtCore.QRect(10, 150, 271, 31))
