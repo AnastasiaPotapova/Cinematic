@@ -20,6 +20,9 @@ class Ui_ChainWindow(object):
                 "background-color: rgb{};".format(colorb))
             self.search_film.setStyleSheet(
                 "background-color: rgb{};".format(colorb))
+            self.btnadd_cinema.setStyleSheet(
+                "background-color: rgb{};".format(colorb))
+
 
         except Exception:
             ChainWindow.setObjectName("ChainWindow")

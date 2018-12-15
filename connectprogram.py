@@ -41,10 +41,9 @@ class FilmM(QWidget, Ui_FilmWindow):
         if event.button() == Qt.LeftButton:
             x, y = (event.x() - 12) // 9, (event.y() - 12) // 13
 
-            if self.film.check_place_beeing(y, x):
-                self.coords.setText("---")
-            else:
-                self.coords.setText("{};{}".format(y + 1, x + 1))
+            if not self.film.check_place_beeing(y, x):
+                self.place_coords.setText(
+                    self.place_coords.text() + "/{};{}".format(y + 1, x + 1))
 
     def keyPressEvent(self, event):
         ev = event.key()
@@ -54,13 +53,16 @@ class FilmM(QWidget, Ui_FilmWindow):
     def choose(self):
         try:
             places = []
-            for a in self.place_coords.text().split("/"):
+            for a in self.place_coords.text().strip("/").split("/"):
                 x, y = map(lambda b: int(b) - 1, a.split(";"))
                 places.append((x, y))
 
             if any(filter(lambda z: self.film.check_place_beeing(z[0], z[1]),
                           places)):
                 self.change_status("Ошибка. Выбраны несуществующие места.")
+            elif len(set(places)) != len(places):
+                self.change_status(
+                    "Ошибка. Выбраны как минимум 2 одиннаковых места.")
             elif any(filter(lambda x: self.film.check_place_is_free(x[0], x[1]),
                             places)):
                 self.change_status("Ошибка. Выбраны уже занятые места.")
@@ -175,6 +177,7 @@ class Settings(QMainWindow, Ui_Form):
             ex.setupUi(ex, sett.colour, sett.colourb)
         except Exception as e:
             print(e)
+
 
 class ChainM(QMainWindow, Ui_ChainWindow):
     def __init__(self):
