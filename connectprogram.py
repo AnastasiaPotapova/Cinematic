@@ -94,20 +94,50 @@ class RoomM(QWidget, Ui_RoomWindow):
         self.go_over_2.clicked.connect(self.show_film)
 
     def add_film(self):
-        self.room.append(self.film_name.text(), self.film_time.text())
-        self.boxfilm.clear()
-        self.boxfilm.addItems(self.room.spisok())
+        try:
+            t = False
+            name, time = self.film_name.text(), self.film_time.text().split(':')
+            if not name:
+                self.change_status("Не введенно название.")
+            elif len(time) != 2:
+                self.change_status(
+                    '''Некоректный формат ввода времени или время не введено.
+Правильный формат: чч:мм''')
+            elif len(time[0]) != 2 or len(time[1]) != 2:
+                self.change_status('''Некоректный формат ввода времени.
+Правильный формат: чч:мм''')
+            elif time in self.room.time_spisok():
+                self.change_status("Сеанс в это время уже есть.")
+            elif int(time[0]) < 0 or int(time[0]) > 24 or int(
+                    time[1]) < 0 or int(time[1]) > 59:
+                self.change_status(
+                    "Некоректный формат времени.")
+            else:
+                t = True
+        except Exception:
+            self.change_status("Неизвестная ошибка.")
+        else:
+            if t:
+                self.room.append(name, time)
+                self.boxfilm.addItems([self.room.spisok()[-1]])
 
     def show_film(self):
-        self.w1 = FilmM(self.room[self.boxfilm.currentIndex()])
-        self.w1.show()
+        if self.room.spisok():
+            self.w1 = FilmM(self.room[self.boxfilm.currentIndex()])
+            self.w1.show()
+        else:
+            self.change_status("Однако некуда переходить.")
+
+    def change_status(self, text):
+        self.status.clear()
+        self.status.append(text)
 
 
 class CinemaM(QWidget, Ui_CinemaWindow):
-    def __init__(self, name):
+    def __init__(self, obj):
         super(CinemaM, self).__init__()
         self.setupUi(self, sett.colour, sett.colourb)
-        self.cinema = name
+        self.cinema = obj
         self.initUI()
 
     def initUI(self):
@@ -116,14 +146,43 @@ class CinemaM(QWidget, Ui_CinemaWindow):
         self.go_over_2.clicked.connect(self.show_room)
 
     def add_room(self):
-        self.cinema.append(self.name_room.text(), int(self.x_input.text()),
-                           int(self.y_input.text()))
-        self.boxrooms.clear()
-        self.boxrooms.addItems(self.cinema.spisok())
+        try:
+            name, x, y = self.name_room.text(), int(self.x_input.text()), int(
+                self.y_input.text())
+            t = False
+            if not name:
+                self.change_status("Не введено название.")
+            elif name in self.cinema.spisok():
+                self.change_status("Комната с таким названием уже существует.")
+            elif not 0 < x < 11:
+                self.change_status('''Введено некоректное кол-во рядов. 
+Рядов должно быть не более 10''')
+            elif not 0 < y < 30:
+                self.change_status('''Введено некоректное кол-во мест в 1-м ряду. 
+Мест в ряду должно быть не более 29''')
+            else:
+                t = True
+
+        except Exception as e:
+            self.change_status("Не введено кол-во рядов или мест в ряду.")
+            print(e)
+
+        else:
+            if t:
+                self.cinema.append(name, x, y)
+            self.boxrooms.clear()
+            self.boxrooms.addItems(self.cinema.spisok())
 
     def show_room(self):
-        self.w1 = RoomM(self.cinema[self.boxrooms.currentIndex()])
-        self.w1.show()
+        if self.cinema.spisok():
+            self.w1 = RoomM(self.cinema[self.boxrooms.currentIndex()])
+            self.w1.show()
+        else:
+            self.change_status("Однако некуда переходить.")
+
+    def change_status(self, text):
+        self.status.clear()
+        self.status.append(text)
 
 
 class Settings(QMainWindow, Ui_Form):
@@ -195,12 +254,18 @@ class ChainM(QMainWindow, Ui_ChainWindow):
 
     def add_cinema(self):
         name = self.name_cinema.text()
-        self.chain.append(name)
-        self.boxcinema.addItems([name])
+        if name:
+            self.chain.append(name)
+            self.boxcinema.addItems([name])
+        else:
+            self.change_status("Название не введено.")
 
     def show_cinema(self):
-        self.w1 = CinemaM(self.chain[self.boxcinema.currentIndex()])
-        self.w1.show()
+        try:
+            self.w1 = CinemaM(self.chain[self.boxcinema.currentIndex()])
+            self.w1.show()
+        except Exception:
+            self.change_status("Однако некуда переходить.")
 
     def show_settings(self):
         sett.show()
@@ -208,6 +273,10 @@ class ChainM(QMainWindow, Ui_ChainWindow):
     def search(self):
         self.w2 = SearchM(self.chain)
         self.w2.show()
+
+    def change_status(self, text):
+        self.status.clear()
+        self.status.append(text)
 
 
 app = QApplication(sys.argv)

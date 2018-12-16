@@ -14,6 +14,9 @@ class Film:
     def show_name(self):
         return self.name
 
+    def show_time(self):
+        return self.time
+
     def show_places(self):
         return '\n'.join([' '.join(x) for x in self.size])
 
@@ -50,6 +53,9 @@ class Room:
 
     def spisok(self):
         return [x.show_name() for x in self.films]
+
+    def time_spisok(self):
+        return [x.show_time() for x in self.films]
 
     def __getitem__(self, item):
         return self.films[item]

@@ -55,6 +55,20 @@ class Ui_CinemaWindow(object):
         self.label2 = QtWidgets.QLabel(CinemaWindow)
         self.label2.setGeometry(QtCore.QRect(20, 120, 121, 21))
         self.label2.setObjectName("label2")
+        self.status = QtWidgets.QTextBrowser(CinemaWindow)
+        self.status.setGeometry(QtCore.QRect(90, 190, 191, 51))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed,
+                                           QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(
+            self.status.sizePolicy().hasHeightForWidth())
+        self.status.setSizePolicy(sizePolicy)
+        self.status.setStyleSheet("background-color: transparent;")
+        self.status.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.status.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        self.status.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        self.status.setObjectName("status")
 
         self.retranslateUi(CinemaWindow)
         QtCore.QMetaObject.connectSlotsByName(CinemaWindow)

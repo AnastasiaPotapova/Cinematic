@@ -27,9 +27,9 @@ class Ui_ChainWindow(object):
         except Exception:
             ChainWindow.setObjectName("ChainWindow")
             ChainWindow.setEnabled(True)
-            ChainWindow.resize(282, 205)
+            ChainWindow.resize(290, 255)
             ChainWindow.setMinimumSize(QtCore.QSize(0, 0))
-            ChainWindow.setMaximumSize(QtCore.QSize(290, 237))
+            ChainWindow.setMaximumSize(QtCore.QSize(290, 255))
             ChainWindow.setStyleSheet("background-color: rgb{};".format(color))
             self.centralwidget = QtWidgets.QWidget(ChainWindow)
             self.centralwidget.setObjectName("centralwidget")
@@ -75,7 +75,21 @@ class Ui_ChainWindow(object):
             self.settings_button.setIconSize(QtCore.QSize(21, 21))
             self.settings_button.setObjectName("settings_button")
             ChainWindow.setCentralWidget(self.centralwidget)
-
+            self.status = QtWidgets.QTextBrowser(self.centralwidget)
+            self.status.setGeometry(QtCore.QRect(10, 200, 251, 51))
+            sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed,
+                                               QtWidgets.QSizePolicy.Fixed)
+            sizePolicy.setHorizontalStretch(0)
+            sizePolicy.setVerticalStretch(0)
+            sizePolicy.setHeightForWidth(
+                self.status.sizePolicy().hasHeightForWidth())
+            self.status.setSizePolicy(sizePolicy)
+            self.status.setStyleSheet("background-color: transparent;")
+            self.status.setFrameShape(QtWidgets.QFrame.NoFrame)
+            self.status.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+            self.status.setHorizontalScrollBarPolicy(
+                QtCore.Qt.ScrollBarAsNeeded)
+            self.status.setObjectName("status")
             self.retranslateUi(ChainWindow)
             QtCore.QMetaObject.connectSlotsByName(ChainWindow)
 
